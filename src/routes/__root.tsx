@@ -1,5 +1,6 @@
 import { Outlet, createRootRouteWithContext } from '@tanstack/solid-router'
 import Header from '../components/Header'
+import SubHeader from '../components/SubHeader'
 // import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools'
 
 export const Route = createRootRouteWithContext()({
@@ -10,7 +11,8 @@ function RootComponent() {
   return (
     <div class='flex h-screen flex-col overflow-hidden bg-[#f6f6f6]'>
       <Header />
-      <div class='px-16'>
+      <div class='flex flex-col px-16 items-center'>
+        <SubHeader />
         <Outlet />
       </div>
       {/* <TanStackRouterDevtools /> */}

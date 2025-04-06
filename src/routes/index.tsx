@@ -7,14 +7,18 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
   return <>
-    <section class='flex flex-col'>
+    <section class='flex flex-col w-full justify-start'>
       <span class='font-lato font-semibold text-2xl my-3'>Featured This Month</span>
       <ul class='flex gap-x-8'>
         <li>
           <ProductCard />
         </li>
-        <li>Xbox</li>
-        <li>Controller</li>
+        <li>
+          <ProductCard />
+        </li>
+        <li>
+          <ProductCard />
+        </li>
       </ul>
     </section>
   </>
