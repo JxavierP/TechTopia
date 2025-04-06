@@ -1,9 +1,21 @@
 import { createFileRoute } from '@tanstack/solid-router'
+import ProductCard from '../components/Product/Card'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <div>Hello "/"!</div>
+  return <>
+    <section class='flex flex-col'>
+      <span class='font-lato font-semibold text-2xl my-3'>Featured This Month</span>
+      <ul class='flex gap-x-8'>
+        <li>
+          <ProductCard />
+        </li>
+        <li>Xbox</li>
+        <li>Controller</li>
+      </ul>
+    </section>
+  </>
 }

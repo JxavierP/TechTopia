@@ -10,7 +10,7 @@ function RootComponent() {
   return (
     <div class='flex h-screen flex-col overflow-hidden bg-[#f6f6f6]'>
       <Header />
-      <div class='px-8'>
+      <div class='px-16'>
         <Outlet />
       </div>
       {/* <TanStackRouterDevtools /> */}
