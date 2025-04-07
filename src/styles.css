@@ -1,64 +1,63 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Bebas Neue';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/BebasNeueRegular.woff2) format('woff2');
+	font-family: "Bebas Neue";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/BebasNeueRegular.woff2) format("woff2");
 }
 
 @font-face {
-  font-family: 'PT Serif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/PTSerifRegular.woff2) format('woff2');
+	font-family: "PT Serif";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/PTSerifRegular.woff2) format("woff2");
 }
 
 @font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/LatoRegular.woff2) format('woff2');
+	font-family: "Lato";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/LatoRegular.woff2) format("woff2");
 }
-
 
 @theme {
-  --font-bebas: "Bebas Neue", sans-serif;
-  --font-pt: "PT Serif", sans-serif;
-  --font-lato: "Lato", sans-serif;
+	--font-bebas: "Bebas Neue", sans-serif;
+	--font-pt: "PT Serif", sans-serif;
+	--font-lato: "Lato", sans-serif;
 }
 
 body {
-  @apply m-0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	@apply m-0;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+		"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .link-underline {
-  border-bottom-width: 0;
-  background-image: linear-gradient(transparent, transparent),
-    linear-gradient(#4f46e5, #4f46e5);
-  background-size: 0% 2px;
-  background-position: 50% 100%;
-  /* Centered */
-  background-repeat: no-repeat;
-  transition: background-size 0.2s ease-in-out, background-position 0.2s ease-in-out;
+	border-bottom-width: 0;
+	background-image: linear-gradient(transparent, transparent), linear-gradient(#4f46e5, #4f46e5);
+	background-size: 0% 2px;
+	background-position: 50% 100%;
+	/* Centered */
+	background-repeat: no-repeat;
+	transition:
+		background-size 0.2s ease-in-out,
+		background-position 0.2s ease-in-out;
 }
 
 .link-underline:hover,
 .group:hover .link-underline {
-  background-size: 100% 2px;
-  background-position: 50% 100%;
-  /* Keep it centered */
+	background-size: 100% 2px;
+	background-position: 50% 100%;
+	/* Keep it centered */
 }
