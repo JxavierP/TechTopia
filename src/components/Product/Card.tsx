@@ -2,7 +2,7 @@ import { PlusIcon } from "../Icons";
 
 function ProductCard() {
 	return (
-		<div aria-label="ProductCard_container" class="group flex h-max w-3xs cursor-pointer flex-col">
+		<li aria-label="ProductCard_container" class="group flex h-max w-3xs cursor-pointer flex-col">
 			<div
 				aria-label="ProductCard_image_container"
 				class="relative mb-1 h-80 justify-center rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95"
@@ -21,7 +21,7 @@ function ProductCard() {
 				</p>
 				<p class="font-bebas text-3xl text-[#131416]">$60.00</p>
 			</div>
-		</div>
+		</li>
 	);
 }
 

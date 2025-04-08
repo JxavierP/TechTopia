@@ -11,7 +11,7 @@ function RootComponent() {
 	return (
 		<div class="flex h-screen flex-col overflow-hidden bg-[#f6f6f6]">
 			<Header />
-			<div class="flex flex-col items-center px-16">
+			<div class="flex flex-col items-center overflow-y-auto">
 				<SubHeader />
 				<Outlet />
 			</div>

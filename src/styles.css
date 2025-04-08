@@ -61,3 +61,12 @@ code {
 	background-position: 50% 100%;
 	/* Keep it centered */
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
