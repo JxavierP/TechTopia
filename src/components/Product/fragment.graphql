@@ -1,0 +1,24 @@
+fragment ProductCardFields on Variant {
+  id
+  name
+  price
+  slug
+  product {
+    id
+    name
+    brand {
+      name
+    }
+  }
+  colors {
+    id
+    slug
+    images {
+      url
+      fileName
+    }
+  }
+  sizes {
+    value
+  }
+}
