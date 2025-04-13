@@ -16,14 +16,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "fragment ProductCardFields on Variant {\n  id\n  name\n  price\n  slug\n  product {\n    id\n    name\n    brand {\n      name\n    }\n  }\n  colors {\n    id\n    slug\n    images {\n      url\n      fileName\n    }\n  }\n  sizes {\n    value\n  }\n}": typeof types.ProductCardFieldsFragmentDoc,
     "query FetchAllBrands {\n  brands {\n    id\n    name\n  }\n}": typeof types.FetchAllBrandsDocument,
-    "query FetchAllSearchableProducts {\n  variants(where: {searchable: true}) {\n    ...ProductCardFields\n  }\n}": typeof types.FetchAllSearchableProductsDocument,
-    "query FetchProductsByTag($tag: String!) {\n  variants(where: {product: {tags_every: {name: $tag}}, searchable: true}) {\n    ...ProductCardFields\n  }\n}": typeof types.FetchProductsByTagDocument,
 };
 const documents: Documents = {
     "fragment ProductCardFields on Variant {\n  id\n  name\n  price\n  slug\n  product {\n    id\n    name\n    brand {\n      name\n    }\n  }\n  colors {\n    id\n    slug\n    images {\n      url\n      fileName\n    }\n  }\n  sizes {\n    value\n  }\n}": types.ProductCardFieldsFragmentDoc,
     "query FetchAllBrands {\n  brands {\n    id\n    name\n  }\n}": types.FetchAllBrandsDocument,
-    "query FetchAllSearchableProducts {\n  variants(where: {searchable: true}) {\n    ...ProductCardFields\n  }\n}": types.FetchAllSearchableProductsDocument,
-    "query FetchProductsByTag($tag: String!) {\n  variants(where: {product: {tags_every: {name: $tag}}, searchable: true}) {\n    ...ProductCardFields\n  }\n}": types.FetchProductsByTagDocument,
 };
 
 /**
@@ -48,14 +44,6 @@ export function graphql(source: "fragment ProductCardFields on Variant {\n  id\n
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FetchAllBrands {\n  brands {\n    id\n    name\n  }\n}"): (typeof documents)["query FetchAllBrands {\n  brands {\n    id\n    name\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "query FetchAllSearchableProducts {\n  variants(where: {searchable: true}) {\n    ...ProductCardFields\n  }\n}"): (typeof documents)["query FetchAllSearchableProducts {\n  variants(where: {searchable: true}) {\n    ...ProductCardFields\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "query FetchProductsByTag($tag: String!) {\n  variants(where: {product: {tags_every: {name: $tag}}, searchable: true}) {\n    ...ProductCardFields\n  }\n}"): (typeof documents)["query FetchProductsByTag($tag: String!) {\n  variants(where: {product: {tags_every: {name: $tag}}, searchable: true}) {\n    ...ProductCardFields\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

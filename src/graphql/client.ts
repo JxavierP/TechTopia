@@ -1,9 +1,7 @@
-// import { GraphQLClient } from "graphql-request";
+import { GraphQLClient } from "graphql-request";
 
-// const client = new GraphQLClient(`${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT}`, {
-//   headers: {
-//     authorization: `Bearer ${process.env.NEXT_PUBLIC_GRAPHCMS_AUTH_TOKEN}`,
-//   },
-// });
-
-// export default client;
+export const client = new GraphQLClient(import.meta.env.VITE_HYGRAPH_API_ENDPOINT, {
+	headers: {
+		Authorization: `Bearer ${import.meta.env.VITE_HYGRAPH_AUTH_TOKEN}`,
+	},
+});
