@@ -3,6 +3,7 @@ import { render } from "solid-js/web";
 
 import { routeTree } from "./routeTree.gen";
 import "./styles.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 
 const router = createRouter({
 	routeTree,
@@ -17,11 +18,13 @@ declare module "@tanstack/solid-router" {
 	}
 }
 
+const queryClient = new QueryClient();
+
 function App() {
 	return (
-		<>
+		<QueryClientProvider client={queryClient}>
 			<RouterProvider router={router} />
-		</>
+		</QueryClientProvider>
 	);
 }
 
