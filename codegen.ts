@@ -5,11 +5,11 @@ const config: CodegenConfig = {
 	schema: "https://us-east-1.cdn.hygraph.com/content/cl6713mi9c4oe01t5fl2qfun4/master",
 	documents: "src/**/*.graphql",
 	generates: {
-		"/src/graphql/generated/": {
-			preset: "client",
-			plugins: ["typescript", "typescript-operations", "typescript-graphql-request"],
+		"src/graphql/generated/": {
+			preset: "client-preset",
+			// plugins: ["typescript", "typescript-operations", "typescript-graphql-request"],
 		},
-		"./graphql.schema.json": {
+		"graphql.schema.json": {
 			plugins: ["introspection"],
 		},
 	},

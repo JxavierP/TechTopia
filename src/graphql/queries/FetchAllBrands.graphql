@@ -1,6 +1,6 @@
 query FetchAllBrands {
-  brands {
-    id
-    name
-  }
+	brands {
+		id
+		name
+	}
 }
