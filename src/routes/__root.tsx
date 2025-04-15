@@ -1,6 +1,6 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/solid-router";
-import Header from "../components/Header";
-import SubHeader from "../components/SubHeader";
+import Header from "../modules/ui/Header";
+import SubHeader from "../modules/ui/SubHeader";
 // import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools'
 
 export const Route = createRootRouteWithContext()({
