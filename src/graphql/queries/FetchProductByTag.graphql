@@ -1,5 +1,5 @@
-# query FetchProductsByTag($tag: String!) {
-# 	variants(where: { product: { tags_every: { name: $tag } }, searchable: true }) {
-# 		...ProductCardFields
-# 	}
-# }
+query FetchProductsByTag($tag: String!) {
+	variants(where: { product: { tags_every: { name: $tag } }, searchable: true }) {
+		...ProductCardFields
+	}
+}
