@@ -64,18 +64,18 @@ import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 import { Link } from "@tanstack/solid-router";
 
 export const Route = createRootRoute({
-	component: () => (
-		<>
-			<header>
-				<nav>
-					<Link to="/">Home</Link>
-					<Link to="/about">About</Link>
-				</nav>
-			</header>
-			<Outlet />
-			<TanStackRouterDevtools />
-		</>
-	),
+  component: () => (
+    <>
+      <header>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+        </nav>
+      </header>
+      <Outlet />
+      <TanStackRouterDevtools />
+    </>
+  ),
 });
 ```
 
@@ -91,26 +91,26 @@ For example:
 
 ```tsx
 const peopleRoute = createRoute({
-	getParentRoute: () => rootRoute,
-	path: "/people",
-	loader: async () => {
-		const response = await fetch("https://swapi.dev/api/people");
-		return response.json() as Promise<{
-			results: {
-				name: string;
-			}[];
-		}>;
-	},
-	component: () => {
-		const data = peopleRoute.useLoaderData();
-		return (
-			<ul>
-				{data.results.map((person) => (
-					<li key={person.name}>{person.name}</li>
-				))}
-			</ul>
-		);
-	},
+  getParentRoute: () => rootRoute,
+  path: "/people",
+  loader: async () => {
+    const response = await fetch("https://swapi.dev/api/people");
+    return response.json() as Promise<{
+      results: {
+        name: string;
+      }[];
+    }>;
+  },
+  component: () => {
+    const data = peopleRoute.useLoaderData();
+    return (
+      <ul>
+        {data.results.map((person) => (
+          <li key={person.name}>{person.name}</li>
+        ))}
+      </ul>
+    );
+  },
 });
 ```
 

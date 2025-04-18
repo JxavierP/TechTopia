@@ -6,13 +6,13 @@ import { createEffect } from "solid-js";
 import FeaturedSection from "../modules/sections/FeaturedSection";
 
 export const Route = createFileRoute("/")({
-	component: RouteComponent,
+  component: RouteComponent,
 });
 
 function RouteComponent() {
-	return (
-		<>
-			<FeaturedSection tag="featured" />
-		</>
-	);
+  return (
+    <>
+      <FeaturedSection tag="featured" />
+    </>
+  );
 }
