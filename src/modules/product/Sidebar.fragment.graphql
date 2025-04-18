@@ -1,0 +1,45 @@
+fragment ProductSidebarFields on Variant {
+	id
+	name
+	price
+	slug
+	colors {
+		...ColorSelector
+	}
+	sizes {
+		value
+	}
+	product {
+		id
+		description
+		name
+		brand {
+			name
+		}
+		variants {
+			...ModelSelector
+		}
+	}
+}
+
+fragment ColorSelector on ColorOption {
+	id
+	name
+	images {
+		url
+		fileName
+	}
+}
+
+fragment ModelSelector on Variant {
+	name
+	slug
+	colors {
+		id
+		name
+		images {
+			url
+			fileName
+		}
+	}
+}

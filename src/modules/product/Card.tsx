@@ -1,7 +1,8 @@
-import type { Component } from "solid-js";
+import { type Component } from "solid-js";
 import type { ProductCardFieldsFragment } from "../../graphql/generated/graphql";
 import formatter from "../../utils/currency-formatter";
 import { PlusIcon } from "../ui/Icons";
+import { Link } from "@tanstack/solid-router";
 
 interface ProductCardProps {
   product: ProductCardFieldsFragment | null;
@@ -9,13 +10,17 @@ interface ProductCardProps {
 }
 
 const ProductCard: Component<ProductCardProps> = (props) => {
+  // // Use createEffect if you need to track any reactive dependencies
+  // createEffect(() => {
+  // 	// Any reactive computations should go here
+  // });
+
   if (props.loading || !props.product) {
     return (
       <li
         aria-label="ProductCard_container_loading"
         class="flex w-3xs flex-shrink-0 animate-pulse flex-col"
       >
-        {" "}
         <div class="mb-1 h-80 rounded-xl bg-gray-200"></div>
         <div class="mt-2 flex flex-col space-y-2">
           <div class="h-4 w-1/4 rounded bg-gray-200"></div>
@@ -31,29 +36,31 @@ const ProductCard: Component<ProductCardProps> = (props) => {
       aria-label="ProductCard_container"
       class="group flex h-max w-3xs flex-shrink-0 cursor-pointer flex-col"
     >
-      <div
-        aria-label="ProductCard_image_container"
-        class="relative mb-1 flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95"
-      >
-        <button class="absolute top-3 right-3 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105">
-          <PlusIcon class="h-5 w-5 hover:stroke-white" />
-        </button>
-        <img
-          src={props.product.colors[0].images[0].url}
-          alt={props.product.colors[0].images[0].fileName}
-          class="block max-h-63 max-w-full"
-          loading="lazy"
-        />
-      </div>
-      <div aria-label="ProductCard_details_container" class="link-underline flex flex-col">
-        <span class="font-sans text-sm font-semibold text-indigo-600">
-          {props.product.product?.brand?.name}
-        </span>
-        <p class="truncate font-sans text-base font-semibold text-[#131416]">
-          {props.product.name}
-        </p>
-        <p class="font-bebas text-3xl text-[#131416]">{formatter.format(props.product.price)}</p>
-      </div>
+      <Link to="/product/$slug" params={{ slug: props.product.slug }}>
+        <div
+          aria-label="ProductCard_image_container"
+          class="relative mb-1 flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95"
+        >
+          <button class="absolute top-3 right-3 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105">
+            <PlusIcon class="h-5 w-5 hover:stroke-white" />
+          </button>
+          <img
+            src={props.product.colors[0].images[0].url}
+            alt={props.product.colors[0].images[0].fileName}
+            class="block max-h-63 max-w-full"
+            loading="lazy"
+          />
+        </div>
+        <div aria-label="ProductCard_details_container" class="link-underline flex flex-col">
+          <span class="font-sans text-sm font-semibold text-indigo-600">
+            {props.product.product?.brand?.name}
+          </span>
+          <p class="truncate font-sans text-base font-semibold text-[#131416]">
+            {props.product.name}
+          </p>
+          <p class="font-bebas text-3xl text-[#131416]">{formatter.format(props.product.price)}</p>
+        </div>
+      </Link>
     </li>
   );
 };

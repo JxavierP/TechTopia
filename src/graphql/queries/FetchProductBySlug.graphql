@@ -1,7 +1,5 @@
-# #import "../../components/Product/fragment.graphql"
-
-# query FetchProductBySlug($slug: String!) {
-# 	variant(where: { slug: $slug }) {
-# 		...ProductSidebarFields
-# 	}
-# }
+query FetchProductBySlug($slug: String!) {
+	variant(where: { slug: $slug }) {
+		...ProductSidebarFields
+	}
+}

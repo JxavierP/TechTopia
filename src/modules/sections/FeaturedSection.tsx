@@ -29,6 +29,8 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
     createEffect(() => {
       console.log("FeaturedSection Query State:", {
         tag: props.tag,
+        data: productQuery.data,
+        // isLoading: productQuery.isLoading,
         status: productQuery.status,
         isFetching: productQuery.isFetching,
         error: productQuery.error,
