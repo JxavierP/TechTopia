@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/solid-query";
-import ProductCard from "../product/Card";
+import ProductCard from "../product/ProductCard";
 import { createEffect, For, Show, Switch, Match } from "solid-js";
 import { client } from "../../graphql/client";
 import {

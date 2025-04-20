@@ -1,20 +1,22 @@
 import { type Component } from "solid-js";
-import type { ProductCardFieldsFragment } from "../../graphql/generated/graphql";
-import formatter from "../../utils/currency-formatter";
-import { PlusIcon } from "../ui/Icons";
+import type { ProductCardFieldsFragment } from "../../../graphql/generated/graphql";
+import formatter from "../../../utils/currency-formatter";
+import { PlusIcon } from "../../ui/Icons";
 import { Link } from "@tanstack/solid-router";
+import { store as productStore } from "../Store";
 
 interface ProductCardProps {
   product: ProductCardFieldsFragment | null;
   loading?: boolean;
 }
 
-const ProductCard: Component<ProductCardProps> = (props) => {
-  // // Use createEffect if you need to track any reactive dependencies
-  // createEffect(() => {
-  // 	// Any reactive computations should go here
-  // });
+function handleProductClick(product: ProductCardFieldsFragment) {
+  productStore.viewerImage = product.colors[0].images[0].url;
+  productStore.imageList = { id: product.id, list: product.colors[0].images };
+  console.log("Product clicked:", product.name);
+}
 
+const ProductCard: Component<ProductCardProps> = (props) => {
   if (props.loading || !props.product) {
     return (
       <li
@@ -33,10 +35,11 @@ const ProductCard: Component<ProductCardProps> = (props) => {
 
   return (
     <li
+      on:click={() => handleProductClick(props.product!)}
       aria-label="ProductCard_container"
       class="group flex h-max w-3xs flex-shrink-0 cursor-pointer flex-col"
     >
-      <Link to="/product/$slug" params={{ slug: props.product.slug }}>
+      <Link to="/product/$slug" preload="intent" params={{ slug: props.product.slug }}>
         <div
           aria-label="ProductCard_image_container"
           class="relative mb-1 flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95"
