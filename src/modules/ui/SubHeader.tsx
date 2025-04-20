@@ -1,7 +1,11 @@
+import { Link } from "@tanstack/solid-router";
+
 function SubHeader() {
   return (
     <div class="flex space-x-8 py-2 font-pt text-lg text-[#292A2F] lg:flex">
-      <p class="link-underline cursor-default">Browse</p>
+      <Link to="/catalog" class="link-underline cursor-default">
+        Browse
+      </Link>
       <p class="link-underline cursor-default">New</p>
       <p class="link-underline cursor-default">Sales</p>
       <span

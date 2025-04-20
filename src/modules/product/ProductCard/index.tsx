@@ -37,15 +37,21 @@ const ProductCard: Component<ProductCardProps> = (props) => {
     <li
       on:click={() => handleProductClick(props.product!)}
       aria-label="ProductCard_container"
-      class="group flex h-max w-3xs flex-shrink-0 cursor-pointer flex-col"
+      class="group flex h-full w-full max-w-3xs flex-shrink-0 cursor-pointer flex-col"
     >
       <Link to="/product/$slug" preload="intent" params={{ slug: props.product.slug }}>
         <div
           aria-label="ProductCard_image_container"
           class="relative mb-1 flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95"
         >
-          <button class="absolute top-3 right-3 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105">
-            <PlusIcon class="h-5 w-5 hover:stroke-white" />
+          <button
+            class="group/button absolute top-3 right-3 z-10 cursor-pointer rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+          >
+            <PlusIcon class="h-5 w-5 stroke-current text-gray-900 group-hover/button:text-white" />
           </button>
           <img
             src={props.product.colors[0].images[0].url}
