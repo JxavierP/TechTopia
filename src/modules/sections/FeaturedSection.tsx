@@ -41,7 +41,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
 
   return (
     <section class="flex w-full flex-col justify-start px-4 md:px-8 lg:px-16">
-      <span class="my-3 font-lato text-2xl font-semibold">Featured This Month</span>
+      <span class="my-3 font-lato font-semibold lg:text-2xl">Featured This Month</span>
 
       <Switch fallback={<div>Something went wrong.</div>}>
         <Match when={productQuery.isLoading}>

@@ -15,47 +15,32 @@ const ProductSidebar = (props: ProductSidebarProps) => {
   return (
     <div class="flex h-full w-1/3 flex-col pl-6">
       <div class="flex grow-0 flex-col overflow-y-hidden">
-        <div class="mx-3 my-4 flex flex-col">
+        <div class="my-4 ml-3 flex flex-col">
           <p class="font-bebas text-5xl font-semibold">{product.name}</p>
           <p class="text-lg font-medium text-indigo-600">by {product.product?.brand?.name}</p>
           <StarRating />
         </div>
-        <div class="mx-3 my-1 flex flex-col">
+        <div class="my-1 ml-3 flex flex-col">
           <p class="font-bebas text-5xl">{formatter.format(product?.price)}</p>
         </div>
         <VariantSelector models={product.product!.variants as ModelSelectorFragment[]} />
-        <div class="mx-3 my-4 flex flex-col space-y-3">
+        <div class="my-4 ml-3 flex flex-col space-y-3">
           <p class="font-serif text-lg">{product.product?.description}</p>
         </div>
       </div>
-      <div class="mx-3 my-4 mt-auto flex space-x-3">
+      <div class="my-4 mt-auto ml-3 flex space-x-3">
         <button
           class="flex h-16 w-full items-center justify-center rounded-md bg-indigo-700 transition-transform duration-100 active:scale-90"
           aria-label="Add to Cart"
-          // onClick={() =>
-          //   addToCart({
-          //     id: product.id,
-          //     price: product.price,
-          //     name: product.product!.name,
-          //     quantity: 1,
-          //     image: product.images[0].url,
-          //     selectedOptions: [
-          //       product.selectedOption!.colorOption!,
-          //       product.selectedOption!.modelOption!,
-          //       product.selectedOption!.sizeOption!,
-          //     ],
-          //   })
-          // }
         >
-          {/* <ShoppingCartIcon className="mr-2 h-8 w-8 text-white" /> */}
-          <p class="font-bebas text-3xl text-white">Add to Cart</p>
+          <p class="font-bebas text-3xl text-white">Buy Now</p>
         </button>
         <button
-          class="flex h-16 w-full items-center justify-center rounded-md bg-black transition-transform duration-100 active:scale-90"
+          class="flex h-16 w-full items-center justify-center rounded-md border-2 border-indigo-700 transition-transform duration-100 active:scale-90"
           aria-label="Add to Cart"
         >
           {/* <HeartIcon className="mr-2 h-8 w-8 text-white" /> */}
-          <p class="font-bebas text-3xl text-white">Add to Wishlist</p>
+          <p class="font-bebas text-3xl text-indigo-700">Add to Cart</p>
         </button>
       </div>
     </div>

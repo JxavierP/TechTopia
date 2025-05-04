@@ -37,15 +37,15 @@ const ProductCard: Component<ProductCardProps> = (props) => {
     <li
       on:click={() => handleProductClick(props.product!)}
       aria-label="ProductCard_container"
-      class="group flex h-full w-full max-w-3xs flex-shrink-0 cursor-pointer flex-col"
+      class="group flex h-full w-full max-w-44 flex-shrink-0 cursor-pointer flex-col lg:max-w-3xs"
     >
       <Link to="/product/$slug" preload="intent" params={{ slug: props.product.slug }}>
         <div
           aria-label="ProductCard_image_container"
-          class="relative mb-1 flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95"
+          class="relative mb-1 flex h-54 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95 lg:h-80"
         >
           <button
-            class="group/button absolute top-3 right-3 z-10 cursor-pointer rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105"
+            class="group/button absolute top-3 right-3 z-10 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105"
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
@@ -56,7 +56,7 @@ const ProductCard: Component<ProductCardProps> = (props) => {
           <img
             src={props.product.colors[0].images[0].url}
             alt={props.product.colors[0].images[0].fileName}
-            class="block max-h-63 max-w-full"
+            class="block max-h-40 max-w-full lg:max-h-63"
             loading="lazy"
           />
         </div>

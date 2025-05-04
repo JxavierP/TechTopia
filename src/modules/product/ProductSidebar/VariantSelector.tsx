@@ -35,7 +35,7 @@ const ColorSelector = (props: ColorSelectorProps) => {
                 }}
               >
                 <span
-                  class={`flex h-12 w-12 flex-col items-center rounded-sm ring-2 ring-offset-2 ${
+                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${
                     productStore.imageList.id === color.id
                       ? "ring-indigo-600"
                       : "ring-gray-400 hover:ring-indigo-600"
