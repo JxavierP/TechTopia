@@ -10,8 +10,8 @@ const ImageList = () => {
             <span
               on:click={() => setProductStore({ viewerImage: image.url })}
               tabIndex={index()}
-              class={`flex h-28 w-28 cursor-pointer flex-col items-center rounded-lg border-2 bg-white p-2 shadow-lg transition-transform duration-100 ease-linear hover:border-indigo-600 active:scale-90 ${
-                image.url === productStore.viewerImage ? "border-indigo-600" : "border-transparent"
+              class={`flex h-28 w-28 cursor-pointer flex-col items-center rounded-lg border-2 bg-white p-2 shadow-lg transition-transform duration-100 ease-linear hover:border-green-600 active:scale-90 ${
+                image.url === productStore.viewerImage ? "border-green-600" : "border-transparent"
               }`}
             >
               <img

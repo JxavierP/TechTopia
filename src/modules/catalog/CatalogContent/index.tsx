@@ -12,14 +12,14 @@ const CatalogContent = (props: CatalogSidebarProps) => {
     <div class="flex h-full w-full flex-col p-2">
       <header class="flex items-center justify-between">
         <div class="flex flex-col">
-          <span class="text-4xl font-semibold text-indigo-600 uppercase">Catalog</span>
+          <span class="text-4xl font-semibold text-green-600 uppercase">Catalog</span>
           <span class="text-sm text-gray-700">Currently Showing - All Products</span>
         </div>
         <div class="flex space-x-5">
-          <button class="w-32 rounded-lg border-2 border-indigo-600 py-2 hover:bg-indigo-500 hover:text-white active:bg-indigo-600">
+          <button class="w-32 rounded-lg border-2 border-green-600 py-2 hover:bg-green-500 hover:text-white active:bg-green-600">
             Price
           </button>
-          <button class="w-32 rounded-lg border-2 border-indigo-600 py-2 hover:bg-indigo-500 hover:text-white active:bg-indigo-600">
+          <button class="w-32 rounded-lg border-2 border-green-600 py-2 hover:bg-green-500 hover:text-white active:bg-green-600">
             Sort By
           </button>
         </div>

@@ -17,7 +17,7 @@ const ProductSidebar = (props: ProductSidebarProps) => {
       <div class="flex grow-0 flex-col overflow-y-hidden">
         <div class="my-4 ml-3 flex flex-col">
           <p class="font-bebas text-5xl font-semibold">{product.name}</p>
-          <p class="text-lg font-medium text-indigo-600">by {product.product?.brand?.name}</p>
+          <p class="text-lg font-medium text-green-600">by {product.product?.brand?.name}</p>
           <StarRating />
         </div>
         <div class="my-1 ml-3 flex flex-col">
@@ -30,17 +30,17 @@ const ProductSidebar = (props: ProductSidebarProps) => {
       </div>
       <div class="my-4 mt-auto ml-3 flex space-x-3">
         <button
-          class="flex h-16 w-full items-center justify-center rounded-md bg-indigo-700 transition-transform duration-100 active:scale-90"
+          class="flex h-16 w-full items-center justify-center rounded-md bg-green-700 transition-transform duration-100 active:scale-90"
           aria-label="Add to Cart"
         >
           <p class="font-bebas text-3xl text-white">Buy Now</p>
         </button>
         <button
-          class="flex h-16 w-full items-center justify-center rounded-md border-2 border-indigo-700 transition-transform duration-100 active:scale-90"
+          class="flex h-16 w-full items-center justify-center rounded-md border-2 border-green-700 transition-transform duration-100 active:scale-90"
           aria-label="Add to Cart"
         >
           {/* <HeartIcon className="mr-2 h-8 w-8 text-white" /> */}
-          <p class="font-bebas text-3xl text-indigo-700">Add to Cart</p>
+          <p class="font-bebas text-3xl text-green-700">Add to Cart</p>
         </button>
       </div>
     </div>

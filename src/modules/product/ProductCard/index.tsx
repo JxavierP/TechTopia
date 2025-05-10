@@ -4,9 +4,10 @@ import formatter from "../../../utils/currency-formatter";
 import { PlusIcon } from "../../ui/Icons";
 import { Link } from "@tanstack/solid-router";
 import { store as productStore } from "../Store";
+import { store as cartStore } from "../../cart/CartStore";
 
 interface ProductCardProps {
-  product: ProductCardFieldsFragment | null;
+  product: ProductCardFieldsFragment;
   loading?: boolean;
 }
 
@@ -17,6 +18,7 @@ function handleProductClick(product: ProductCardFieldsFragment) {
 }
 
 const ProductCard: Component<ProductCardProps> = (props) => {
+  console.log("Cart Store:", cartStore);
   if (props.loading || !props.product) {
     return (
       <li
@@ -42,13 +44,25 @@ const ProductCard: Component<ProductCardProps> = (props) => {
       <Link to="/product/$slug" preload="intent" params={{ slug: props.product.slug }}>
         <div
           aria-label="ProductCard_image_container"
-          class="relative mb-1 flex h-54 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-indigo-600 active:scale-95 lg:h-80"
+          class="relative mb-1 flex h-54 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-green-600 active:scale-95 lg:h-80"
         >
           <button
-            class="group/button absolute top-3 right-3 z-10 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-indigo-600 active:scale-105"
+            class="group/button absolute top-3 right-3 z-10 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-green-600 active:scale-105"
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
+              cartStore.addToCart({
+                id: props.product.id,
+                name: props.product.product!.name,
+                image: props.product.colors[0].images[0].url,
+                price: props.product.price,
+                quantity: 1,
+                selectedOptions: [
+                  { type: "Color", value: props.product.colors[0].name! },
+                  { type: "Model", value: props.product.name },
+                ],
+              });
+              console.log("Added to cart:", props.product.product!.name);
             }}
           >
             <PlusIcon class="h-5 w-5 stroke-current text-gray-900 group-hover/button:text-white" />
@@ -61,7 +75,7 @@ const ProductCard: Component<ProductCardProps> = (props) => {
           />
         </div>
         <div aria-label="ProductCard_details_container" class="link-underline flex flex-col">
-          <span class="font-sans text-sm font-semibold text-indigo-600">
+          <span class="font-sans text-sm font-semibold text-green-600">
             {props.product.product?.brand?.name}
           </span>
           <p class="truncate font-sans text-base font-semibold text-[#131416]">

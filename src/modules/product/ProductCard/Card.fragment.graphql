@@ -13,6 +13,7 @@ fragment ProductCardFields on Variant {
   colors {
     id
     slug
+    name
     images {
       url
       fileName

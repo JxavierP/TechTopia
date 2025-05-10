@@ -8,7 +8,7 @@ const MenuIcon = ({ class: className }: IconProps) => {
       class={className}
       width="24px"
       height="24px"
-      stroke-width="1.5"
+      stroke-width={2}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -92,7 +92,7 @@ const PlusIcon = ({ class: className }: IconProps) => {
       class={className}
       width="24px"
       height="24px"
-      stroke-width="1.5"
+      stroke-width={2}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -101,7 +101,7 @@ const PlusIcon = ({ class: className }: IconProps) => {
     >
       <path
         d="M6 12H12M18 12H12M12 12V6M12 12V18"
-        stroke-width="1.5"
+        stroke-width={2}
         stroke-linecap="round"
         stroke-linejoin="round"
       ></path>
@@ -109,4 +109,57 @@ const PlusIcon = ({ class: className }: IconProps) => {
   );
 };
 
-export { MenuIcon, CartIcon, SearchIcon, PlusIcon };
+const MinusIcon = ({ class: className }: IconProps) => {
+  return (
+    <svg
+      class={className}
+      width="24px"
+      height="24px"
+      stroke-width={2}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      color="currentColor"
+    >
+      <path
+        d="M6 12H18"
+        stroke="#000000"
+        stroke-width={2}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  );
+};
+const TrashIcon = ({ class: className }: IconProps) => {
+  return (
+    <svg
+      class={`${className} hover:fill-current`}
+      width="24px"
+      height="24px"
+      viewBox="0 0 24 24"
+      stroke-width={2}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      color="currentColor"
+      stroke="currentColor"
+    >
+      <path
+        d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9"
+        // stroke="currentColor"
+        stroke-width={2}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+      <path
+        d="M21 6L15.375 6M3 6L8.625 6M8.625 6V4C8.625 2.89543 9.52043 2 10.625 2H13.375C14.4796 2 15.375 2.89543 15.375 4V6M8.625 6L15.375 6"
+        // stroke="#000000"
+        stroke-width={2}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  );
+};
+
+export { MenuIcon, CartIcon, SearchIcon, PlusIcon, MinusIcon, TrashIcon };
