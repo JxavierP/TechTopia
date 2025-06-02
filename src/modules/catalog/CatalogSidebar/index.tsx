@@ -1,12 +1,13 @@
 import { For } from "solid-js";
-import type { Brand } from "../../../graphql/generated/graphql";
+import type { ResultOf } from "gql.tada";
+import type { AllBrandsQuery } from "../../../graphql/queries";
 
 interface CatalogSidebarProps {
-  brands: Brand[];
+  data: ResultOf<typeof AllBrandsQuery>;
 }
 
 const CatalogSidebar = (props: CatalogSidebarProps) => {
-  const brands = props.brands;
+  const brands = props.data.brands;
   return (
     <div class="flex h-full w-60 shrink-0 flex-col space-y-3">
       <div class="flex flex-col space-y-2">

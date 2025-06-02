@@ -1,9 +1,10 @@
-import type { Variant } from "../../../graphql/generated/graphql";
+import type { FragmentOf } from "gql.tada";
 import ImageList from "./ImageList";
 import ImageViewer from "./ImageViewer";
+import { ImageViewerFragment } from "./ImageViewer/imageviewer.fragment";
 
 interface ProductCarouselProps {
-  product: Variant;
+  product: FragmentOf<typeof ImageViewerFragment>;
 }
 
 const ProductCarousel = (props: ProductCarouselProps) => {

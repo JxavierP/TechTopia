@@ -1,22 +1,20 @@
 import { Link } from "@tanstack/solid-router";
-import type {
-  ColorSelectorFragment,
-  ModelSelectorFragment,
-} from "../../../graphql/generated/graphql";
 import { store as productStore, setStore as setProductStore } from "../Store";
 import { Route as ProductSlugRoute } from "../../../routes/product/$slug";
 import { createEffect, createMemo, For, Show } from "solid-js";
+import { ColorSelectorFragment, ModelSelectorFragment } from "./Sidebar.fragment";
+import { readFragment, type FragmentOf } from "gql.tada";
 
 interface ColorSelectorProps {
-  colors: ColorSelectorFragment[];
+  colors: FragmentOf<typeof ColorSelectorFragment>[];
 }
 
 interface ModelSelectorProps {
-  models: ModelSelectorFragment[];
+  models: FragmentOf<typeof ModelSelectorFragment>[];
 }
 
 const ColorSelector = (props: ColorSelectorProps) => {
-  const colors = createMemo(() => props.colors);
+  const colors = createMemo(() => readFragment(ColorSelectorFragment, props.colors));
   console.log(colors);
   return (
     <div class="flex flex-col space-y-1">
@@ -35,11 +33,10 @@ const ColorSelector = (props: ColorSelectorProps) => {
                 }}
               >
                 <span
-                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${
-                    productStore.imageList.id === color.id
-                      ? "ring-green-600"
-                      : "ring-gray-400 hover:ring-green-600"
-                  }`}
+                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${productStore.imageList.id === color.id
+                    ? "ring-green-600"
+                    : "ring-gray-400 hover:ring-green-600"
+                    }`}
                 >
                   <img
                     alt={color.images[0].fileName}
@@ -56,9 +53,10 @@ const ColorSelector = (props: ColorSelectorProps) => {
   );
 };
 
-const ModelSelector = ({ models }: ModelSelectorProps) => {
+const ModelSelector = (props: ModelSelectorProps) => {
   const routerSlug = ProductSlugRoute.useParams();
   const currentSlug = createMemo(() => routerSlug().slug);
+  const models = readFragment(ModelSelectorFragment, props.models);
 
   return (
     <div class="flex flex-col space-y-1">
@@ -77,11 +75,10 @@ const ModelSelector = ({ models }: ModelSelectorProps) => {
                     },
                   });
                 }}
-                class={`flex flex-col items-center px-2 ring-2 ring-offset-2 ${
-                  currentSlug() === model.slug
-                    ? "ring-green-600"
-                    : "ring-gray-400 hover:ring-green-600"
-                }`}
+                class={`flex flex-col items-center px-2 ring-2 ring-offset-2 ${currentSlug() === model.slug
+                  ? "ring-green-600"
+                  : "ring-gray-400 hover:ring-green-600"
+                  }`}
               >
                 {model.name}
               </span>
@@ -94,11 +91,12 @@ const ModelSelector = ({ models }: ModelSelectorProps) => {
 };
 
 interface VariantSelectorProps {
-  models: ModelSelectorFragment[];
+  models: FragmentOf<typeof ModelSelectorFragment>[];
 }
 
-const VariantSelector = ({ models }: VariantSelectorProps) => {
+const VariantSelector = (props: VariantSelectorProps) => {
   const routerSlug = ProductSlugRoute.useParams();
+  const models = readFragment(ModelSelectorFragment, props.models);
   const selectedModel = createMemo(() => {
     const slug = routerSlug().slug;
     return models.find((model) => model.slug === slug);
@@ -117,8 +115,8 @@ const VariantSelector = ({ models }: VariantSelectorProps) => {
   });
   return (
     <div class="mx-3 my-2 flex flex-col space-y-3">
-      <ModelSelector models={models} />
-      <Show when={selectedModel()}>{(model) => <ColorSelector colors={model().colors} />}</Show>
+      <ModelSelector models={props.models} />
+      <Show when={selectedModel()}>{(model) => <ColorSelector colors={model().colors as unknown as FragmentOf<typeof ColorSelectorFragment>[]} />}</Show>
       {/* <SizeSelector /> */}
     </div>
   );

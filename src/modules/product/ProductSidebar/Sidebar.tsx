@@ -1,17 +1,16 @@
-import type {
-  ModelSelectorFragment,
-  ProductSidebarFieldsFragment,
-} from "../../../graphql/generated/graphql";
+import { readFragment, type FragmentOf } from "gql.tada";
 import formatter from "../../../utils/currency-formatter";
 import VariantSelector from "./VariantSelector";
+import { ModelSelectorFragment, ProductSidebarFragment, } from "./Sidebar.fragment";
 
 interface ProductSidebarProps {
-  product: ProductSidebarFieldsFragment;
+  product: FragmentOf<typeof ProductSidebarFragment>;
   // loading: Boolean;
 }
 
 const ProductSidebar = (props: ProductSidebarProps) => {
-  const product = props.product;
+  const product = readFragment(ProductSidebarFragment, props.product);
+  const models = readFragment(ModelSelectorFragment, product.product?.variants);
   return (
     <div class="flex h-full w-1/3 flex-col pl-6">
       <div class="flex grow-0 flex-col overflow-y-hidden">
@@ -23,7 +22,7 @@ const ProductSidebar = (props: ProductSidebarProps) => {
         <div class="my-1 ml-3 flex flex-col">
           <p class="font-bebas text-5xl">{formatter.format(product?.price)}</p>
         </div>
-        <VariantSelector models={product.product!.variants as ModelSelectorFragment[]} />
+        <VariantSelector models={models!} />
         <div class="my-4 ml-3 flex flex-col space-y-3">
           <p class="font-serif text-lg">{product.product?.description}</p>
         </div>

@@ -1,5 +1,0 @@
-query FetchAllSearchableProducts {
-  variants(where: { searchable: true }) {
-    ...ProductCardFields
-  }
-}

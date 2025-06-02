@@ -1,12 +1,13 @@
-import type { ImageViewerFieldsFragment } from "../../../../graphql/generated/graphql";
+import { readFragment, type FragmentOf } from "gql.tada";
 import { store as productStore } from "../../Store";
+import { ImageViewerFragment } from "./imageviewer.fragment";
 
 interface ImageViewerProps {
-  product: ImageViewerFieldsFragment;
+  product: FragmentOf<typeof ImageViewerFragment>;
 }
 
 const ImageViewer = (props: ImageViewerProps) => {
-  const product = props.product;
+  const product = readFragment(ImageViewerFragment, props.product);
   return (
     <div class="flex h-full w-full items-center justify-center bg-white">
       <div class="relative flex h-[80%] w-[80%] items-center justify-center">

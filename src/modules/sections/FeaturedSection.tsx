@@ -2,12 +2,7 @@ import { useQuery } from "@tanstack/solid-query";
 import ProductCard from "../product/ProductCard";
 import { createEffect, For, Show, Switch, Match } from "solid-js";
 import { client } from "../../graphql/client";
-import {
-  FetchAllSearchableProductsDocument,
-  ProductCardFieldsFragmentDoc,
-  type FetchAllSearchableProductsQuery,
-} from "../../graphql/generated/graphql";
-import { useFragment } from "../../graphql/generated";
+import { AllSearchableProductsQuery } from "../../graphql/queries";
 
 interface FeaturedSectionProps {
   tag: string;
@@ -17,19 +12,19 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
   const productQuery = useQuery(() => ({
     queryKey: ["productsByTag", props.tag],
     queryFn: async () => {
-      return await client.request<FetchAllSearchableProductsQuery>(
-        FetchAllSearchableProductsDocument,
-        { tag: props.tag },
-      );
+      return await client.request(AllSearchableProductsQuery, {
+        tag: props.tag
+      })
     },
     // staleTime: 5 * 60 * 1000,
   }));
+
 
   if (import.meta.env.DEV) {
     createEffect(() => {
       console.log("FeaturedSection Query State:", {
         tag: props.tag,
-        data: productQuery.data,
+        data: productQuery.data?.variants,
         // isLoading: productQuery.isLoading,
         status: productQuery.status,
         isFetching: productQuery.isFetching,
@@ -38,6 +33,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
       });
     });
   }
+
 
   return (
     <section class="flex w-full flex-col justify-start px-4 md:px-8 lg:px-16">
@@ -61,13 +57,11 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
             when={productQuery.data?.variants && productQuery.data.variants.length > 0}
             fallback={<p class="my-4 text-gray-500">No featured products found for this month.</p>}
           >
-            <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto">
-              <For each={productQuery.data?.variants}>
-                {(variant) => {
-                  const product = useFragment(ProductCardFieldsFragmentDoc, variant);
-                  return <ProductCard product={product} />;
-                }}
-              </For>
+            <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto"> <For each={productQuery.data?.variants}>
+              {(product) => {
+                return <ProductCard product={product} />;
+              }}
+            </For>
             </ul>
           </Show>
         </Match>

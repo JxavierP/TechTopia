@@ -1,20 +1,22 @@
 import { queryOptions } from "@tanstack/solid-query";
 import { createFileRoute } from "@tanstack/solid-router";
 import { queryClient } from "../../main";
-import { client } from "../../graphql/client";
-import {
-  FetchProductBySlugDocument,
-  type FetchProductBySlugQuery,
-  type Variant,
-} from "../../graphql/generated/graphql";
+import { client, readFragment, type FragmentOf } from "../../graphql/client";
 import ProductView from "../../modules/product/ProductVIew";
 import { setStore as productStore } from "../../modules/product/Store";
+import { ProductBySlugQuery } from "../../graphql/queries";
+import {
+  ColorSelectorFragment,
+  ProductSidebarFragment,
+} from "../../modules/product/ProductSidebar/Sidebar.fragment";
+import { ImageViewerFragment } from "../../modules/product/ProductCarousel/ImageViewer/imageviewer.fragment";
+import { ProductViewerFragment } from "../../modules/product/ProductVIew/productviewer.fragment";
 
 const productQueryOptions = (slug: string) =>
   queryOptions({
     queryKey: ["product", slug],
     queryFn: async () => {
-      return await client.request<FetchProductBySlugQuery>(FetchProductBySlugDocument, {
+      return await client.request(ProductBySlugQuery, {
         slug: slug,
       });
     },
@@ -29,12 +31,20 @@ export const Route = createFileRoute("/product/$slug")({
 
 function RouteComponent() {
   const data = Route.useLoaderData();
-  const product = data().variant as Variant;
+  const product = readFragment(ProductViewerFragment, data().variant);
+  const carouselData = readFragment(ImageViewerFragment, product!);
+  const sidebarData = readFragment(ProductSidebarFragment, product!);
+  const productColors = readFragment(ColorSelectorFragment, sidebarData.colors[0]);
   if (product) {
     productStore({
-      viewerImage: product.colors[0].images[0].url,
-      imageList: { id: product.colors[0].id, list: product.colors[0].images },
+      viewerImage: productColors.images[0].url,
+      imageList: { id: productColors.id, list: productColors.images },
     });
   }
-  return <ProductView product={product} />;
+  return (
+    <ProductView
+      carouselProduct={carouselData as unknown as FragmentOf<typeof ImageViewerFragment>}
+      sidebarProduct={sidebarData as unknown as FragmentOf<typeof ProductSidebarFragment>}
+    />
+  );
 }

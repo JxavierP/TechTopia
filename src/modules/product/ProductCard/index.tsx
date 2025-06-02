@@ -1,25 +1,27 @@
-import { type Component } from "solid-js";
-import type { ProductCardFieldsFragment } from "../../../graphql/generated/graphql";
 import formatter from "../../../utils/currency-formatter";
 import { PlusIcon } from "../../ui/Icons";
 import { Link } from "@tanstack/solid-router";
 import { store as productStore } from "../Store";
 import { store as cartStore } from "../../cart/CartStore";
+import { readFragment, type FragmentOf } from "gql.tada";
+import { ProductCardFragment } from "./Card.fragment";
 
 interface ProductCardProps {
-  product: ProductCardFieldsFragment;
+  product: FragmentOf<typeof ProductCardFragment> | null;
   loading?: boolean;
 }
 
-function handleProductClick(product: ProductCardFieldsFragment) {
+function handleProductClick(data: FragmentOf<typeof ProductCardFragment>) {
+  const product = readFragment(ProductCardFragment, data);
   productStore.viewerImage = product.colors[0].images[0].url;
   productStore.imageList = { id: product.id, list: product.colors[0].images };
   console.log("Product clicked:", product.name);
 }
 
-const ProductCard: Component<ProductCardProps> = (props) => {
+const ProductCard = (props: ProductCardProps) => {
+  const product = readFragment(ProductCardFragment, props.product);
   console.log("Cart Store:", cartStore);
-  if (props.loading || !props.product) {
+  if (props.loading || !product) {
     return (
       <li
         aria-label="ProductCard_container_loading"
@@ -41,7 +43,7 @@ const ProductCard: Component<ProductCardProps> = (props) => {
       aria-label="ProductCard_container"
       class="group flex h-full w-full max-w-44 flex-shrink-0 cursor-pointer flex-col lg:max-w-3xs"
     >
-      <Link to="/product/$slug" preload="intent" params={{ slug: props.product.slug }}>
+      <Link to="/product/$slug" preload="intent" params={{ slug: product.slug }}>
         <div
           aria-label="ProductCard_image_container"
           class="relative mb-1 flex h-54 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-green-600 active:scale-95 lg:h-80"
@@ -52,36 +54,34 @@ const ProductCard: Component<ProductCardProps> = (props) => {
               e.stopPropagation();
               e.preventDefault();
               cartStore.addToCart({
-                id: props.product.id,
-                name: props.product.product!.name,
-                image: props.product.colors[0].images[0].url,
-                price: props.product.price,
+                id: product.id,
+                name: product.product!.name,
+                image: product.colors[0].images[0].url,
+                price: product.price,
                 quantity: 1,
                 selectedOptions: [
-                  { type: "Color", value: props.product.colors[0].name! },
-                  { type: "Model", value: props.product.name },
+                  { type: "Color", value: product.colors[0].name! },
+                  { type: "Model", value: product.name },
                 ],
               });
-              console.log("Added to cart:", props.product.product!.name);
+              console.log("Added to cart:", product.product!.name);
             }}
           >
             <PlusIcon class="h-5 w-5 stroke-current text-gray-900 group-hover/button:text-white" />
           </button>
           <img
-            src={props.product.colors[0].images[0].url}
-            alt={props.product.colors[0].images[0].fileName}
+            src={product.colors[0].images[0].url}
+            alt={product.colors[0].images[0].fileName}
             class="block max-h-40 max-w-full lg:max-h-63"
             loading="lazy"
           />
         </div>
         <div aria-label="ProductCard_details_container" class="link-underline flex flex-col">
           <span class="font-sans text-sm font-semibold text-green-600">
-            {props.product.product?.brand?.name}
+            {product.product?.brand?.name}
           </span>
-          <p class="truncate font-sans text-base font-semibold text-[#131416]">
-            {props.product.name}
-          </p>
-          <p class="font-bebas text-3xl text-[#131416]">{formatter.format(props.product.price)}</p>
+          <p class="truncate font-sans text-base font-semibold text-[#131416]">{product.name}</p>
+          <p class="font-bebas text-3xl text-[#131416]">{formatter.format(product.price)}</p>
         </div>
       </Link>
     </li>
