@@ -1,14 +1,9 @@
 import { For } from "solid-js";
+import ProductCardFragment from "../../product/ProductCard/fragment";
+import type { FragmentOf } from "gql.tada";
 import ProductCard from "../../product/ProductCard";
-import { readFragment, type FragmentOf } from "gql.tada";
-import { ProductCardFragment } from "../../product/ProductCard/Card.fragment";
 
-interface CatalogSidebarProps {
-  products: FragmentOf<typeof ProductCardFragment>[];
-}
-
-const CatalogContent = (props: CatalogSidebarProps) => {
-  const products = readFragment(ProductCardFragment, props.products);
+const CatalogContent = (props: { products: FragmentOf<typeof ProductCardFragment>[] }) => {
   return (
     <div class="flex h-full w-full flex-col p-2">
       <header class="flex items-center justify-between">
@@ -52,10 +47,8 @@ const CatalogContent = (props: CatalogSidebarProps) => {
         </span>
       </div>
       <main class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-        <For each={products} fallback={<div>Loading...</div>}>
-          {(product) => (
-            <ProductCard product={product as unknown as FragmentOf<typeof ProductCardFragment>} />
-          )}
+        <For each={props.products} fallback={<div>Loading...</div>}>
+          {(product) => <ProductCard product={product!} />}
         </For>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import { graphql } from "../../../graphql/client";
-import { ImageViewerFragment } from "../ProductCarousel/ImageViewer/imageviewer.fragment";
-import { ProductSidebarFragment } from "../ProductSidebar/Sidebar.fragment";
+import ImageViewerFragment from "../ProductCarousel/ImageViewer/fragment";
+import ProductSidebarFragment from "../ProductSidebar/Sidebar.fragment";
 
 export const ProductViewerFragment = graphql(
   `

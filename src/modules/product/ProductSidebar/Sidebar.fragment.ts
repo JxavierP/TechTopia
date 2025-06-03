@@ -1,7 +1,7 @@
 import { graphql } from "../../../graphql/client";
 
 export const ColorSelectorFragment = graphql(`
-  fragment ColorSelectorFragment on ColorOption {
+  fragment ColorSelectorFragment on ColorOption @_unmask {
     id
     name
     slug
@@ -13,7 +13,7 @@ export const ColorSelectorFragment = graphql(`
 `);
 
 export const ModelSelectorFragment = graphql(`
-  fragment ModelSelectorFragment on Variant {
+  fragment ModelSelectorFragment on Variant @_unmask {
     id
     name
     slug
@@ -33,7 +33,7 @@ export const ModelSelectorFragment = graphql(`
   }
 `);
 
-export const ProductSidebarFragment = graphql(
+const ProductSidebarFragment = graphql(
   `
     fragment ProductSidebarFragment on Variant {
       id
@@ -61,3 +61,5 @@ export const ProductSidebarFragment = graphql(
   `,
   [ModelSelectorFragment, ColorSelectorFragment],
 );
+
+export default ProductSidebarFragment;

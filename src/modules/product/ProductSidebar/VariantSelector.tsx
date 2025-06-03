@@ -5,15 +5,7 @@ import { createEffect, createMemo, For, Show } from "solid-js";
 import { ColorSelectorFragment, ModelSelectorFragment } from "./Sidebar.fragment";
 import { readFragment, type FragmentOf } from "gql.tada";
 
-interface ColorSelectorProps {
-  colors: FragmentOf<typeof ColorSelectorFragment>[];
-}
-
-interface ModelSelectorProps {
-  models: FragmentOf<typeof ModelSelectorFragment>[];
-}
-
-const ColorSelector = (props: ColorSelectorProps) => {
+const ColorSelector = (props: { colors: FragmentOf<typeof ColorSelectorFragment>[] }) => {
   const colors = createMemo(() => readFragment(ColorSelectorFragment, props.colors));
   console.log(colors);
   return (
@@ -33,10 +25,11 @@ const ColorSelector = (props: ColorSelectorProps) => {
                 }}
               >
                 <span
-                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${productStore.imageList.id === color.id
-                    ? "ring-green-600"
-                    : "ring-gray-400 hover:ring-green-600"
-                    }`}
+                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${
+                    productStore.imageList.id === color.id
+                      ? "ring-green-600"
+                      : "ring-gray-400 hover:ring-green-600"
+                  }`}
                 >
                   <img
                     alt={color.images[0].fileName}
@@ -53,7 +46,7 @@ const ColorSelector = (props: ColorSelectorProps) => {
   );
 };
 
-const ModelSelector = (props: ModelSelectorProps) => {
+const ModelSelector = (props: { models: FragmentOf<typeof ModelSelectorFragment>[] }) => {
   const routerSlug = ProductSlugRoute.useParams();
   const currentSlug = createMemo(() => routerSlug().slug);
   const models = readFragment(ModelSelectorFragment, props.models);
@@ -75,10 +68,11 @@ const ModelSelector = (props: ModelSelectorProps) => {
                     },
                   });
                 }}
-                class={`flex flex-col items-center px-2 ring-2 ring-offset-2 ${currentSlug() === model.slug
-                  ? "ring-green-600"
-                  : "ring-gray-400 hover:ring-green-600"
-                  }`}
+                class={`flex flex-col items-center px-2 ring-2 ring-offset-2 ${
+                  currentSlug() === model.slug
+                    ? "ring-green-600"
+                    : "ring-gray-400 hover:ring-green-600"
+                }`}
               >
                 {model.name}
               </span>
@@ -116,7 +110,7 @@ const VariantSelector = (props: VariantSelectorProps) => {
   return (
     <div class="mx-3 my-2 flex flex-col space-y-3">
       <ModelSelector models={props.models} />
-      <Show when={selectedModel()}>{(model) => <ColorSelector colors={model().colors as unknown as FragmentOf<typeof ColorSelectorFragment>[]} />}</Show>
+      <Show when={selectedModel()}>{(model) => <ColorSelector colors={model().colors} />}</Show>
       {/* <SizeSelector /> */}
     </div>
   );

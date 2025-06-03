@@ -1,6 +1,6 @@
 import { graphql } from "../../../../graphql/client";
 
-export const ImageViewerFragment = graphql(`
+const ImageViewerFragment = graphql(`
   fragment ImageViewerFragment on Variant {
     name
     colors {
@@ -17,3 +17,5 @@ export const ImageViewerFragment = graphql(`
     }
   }
 `);
+
+export default ImageViewerFragment;

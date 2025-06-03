@@ -1,5 +1,5 @@
-import { ProductCardFragment } from "../modules/product/ProductCard/Card.fragment";
-import { ProductViewerFragment } from "../modules/product/ProductVIew/productviewer.fragment";
+import ProductCardFragment from "../modules/product/ProductCard/fragment";
+import { ProductViewerFragment } from "../modules/product/ProductVIew/fragment";
 import { graphql } from "./client";
 
 export const AllSearchableProductsQuery = graphql(

@@ -1,6 +1,6 @@
 import { graphql } from "../../../graphql/client";
 
-export const ProductCardFragment = graphql(`
+const ProductCardFragment = graphql(`
   fragment ProductCardFragment on Variant {
     id
     name
@@ -27,3 +27,5 @@ export const ProductCardFragment = graphql(`
     }
   }
 `);
+
+export default ProductCardFragment;

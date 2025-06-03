@@ -1,7 +1,7 @@
 import { graphql } from "../../../../graphql/client";
 
-export const ImageListFragment = graphql(`
-  fragment ImageListFields on Variant {
+const ImageListFragment = graphql(`
+  fragment ImageListFragment on Variant {
     colors(first: 1) {
       images {
         url
@@ -10,3 +10,5 @@ export const ImageListFragment = graphql(`
     }
   }
 `);
+
+export default ImageListFragment;

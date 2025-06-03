@@ -1,15 +1,10 @@
-import formatter from "../../../utils/currency-formatter";
-import { PlusIcon } from "../../ui/Icons";
 import { Link } from "@tanstack/solid-router";
 import { store as productStore } from "../Store";
 import { store as cartStore } from "../../cart/CartStore";
 import { readFragment, type FragmentOf } from "gql.tada";
-import { ProductCardFragment } from "./Card.fragment";
-
-interface ProductCardProps {
-  product: FragmentOf<typeof ProductCardFragment> | null;
-  loading?: boolean;
-}
+import { PlusIcon } from "../../ui/Icons";
+import formatter from "../../../utils/currency-formatter";
+import ProductCardFragment from "./fragment";
 
 function handleProductClick(data: FragmentOf<typeof ProductCardFragment>) {
   const product = readFragment(ProductCardFragment, data);
@@ -18,10 +13,10 @@ function handleProductClick(data: FragmentOf<typeof ProductCardFragment>) {
   console.log("Product clicked:", product.name);
 }
 
-const ProductCard = (props: ProductCardProps) => {
+const ProductCard = (props: { product: FragmentOf<typeof ProductCardFragment> | null }) => {
   const product = readFragment(ProductCardFragment, props.product);
   console.log("Cart Store:", cartStore);
-  if (props.loading || !product) {
+  if (!product) {
     return (
       <li
         aria-label="ProductCard_container_loading"

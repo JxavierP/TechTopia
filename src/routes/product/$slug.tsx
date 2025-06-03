@@ -5,12 +5,11 @@ import { client, readFragment, type FragmentOf } from "../../graphql/client";
 import ProductView from "../../modules/product/ProductVIew";
 import { setStore as productStore } from "../../modules/product/Store";
 import { ProductBySlugQuery } from "../../graphql/queries";
-import {
+import { ProductViewerFragment } from "../../modules/product/ProductVIew/fragment";
+import ImageViewerFragment from "../../modules/product/ProductCarousel/ImageViewer/fragment";
+import ProductSidebarFragment, {
   ColorSelectorFragment,
-  ProductSidebarFragment,
 } from "../../modules/product/ProductSidebar/Sidebar.fragment";
-import { ImageViewerFragment } from "../../modules/product/ProductCarousel/ImageViewer/imageviewer.fragment";
-import { ProductViewerFragment } from "../../modules/product/ProductVIew/productviewer.fragment";
 
 const productQueryOptions = (slug: string) =>
   queryOptions({

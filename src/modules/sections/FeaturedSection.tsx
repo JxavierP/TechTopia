@@ -13,12 +13,11 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
     queryKey: ["productsByTag", props.tag],
     queryFn: async () => {
       return await client.request(AllSearchableProductsQuery, {
-        tag: props.tag
-      })
+        tag: props.tag,
+      });
     },
     // staleTime: 5 * 60 * 1000,
   }));
-
 
   if (import.meta.env.DEV) {
     createEffect(() => {
@@ -34,7 +33,6 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
     });
   }
 
-
   return (
     <section class="flex w-full flex-col justify-start px-4 md:px-8 lg:px-16">
       <span class="my-3 font-lato font-semibold lg:text-2xl">Featured This Month</span>
@@ -42,7 +40,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
       <Switch fallback={<div>Something went wrong.</div>}>
         <Match when={productQuery.isLoading}>
           <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto">
-            <For each={Array(4)}>{() => <ProductCard product={null} loading={true} />}</For>
+            <For each={Array(4)}>{() => <ProductCard product={null} />}</For>
           </ul>
         </Match>
 
@@ -57,11 +55,13 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
             when={productQuery.data?.variants && productQuery.data.variants.length > 0}
             fallback={<p class="my-4 text-gray-500">No featured products found for this month.</p>}
           >
-            <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto"> <For each={productQuery.data?.variants}>
-              {(product) => {
-                return <ProductCard product={product} />;
-              }}
-            </For>
+            <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto">
+              {" "}
+              <For each={productQuery.data?.variants}>
+                {(product) => {
+                  return <ProductCard product={product} />;
+                }}
+              </For>
             </ul>
           </Show>
         </Match>

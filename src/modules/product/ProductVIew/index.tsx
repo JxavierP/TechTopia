@@ -1,6 +1,6 @@
 import ProductCarousel from "../ProductCarousel";
 import ProductSidebar from "../ProductSidebar/Sidebar";
-import { ImageViewerFragment } from "../ProductCarousel/ImageViewer/imageviewer.fragment";
+import { ImageViewerFragment } from "../ProductCarousel/ImageViewer/fragment";
 import { ProductSidebarFragment } from "../ProductSidebar/Sidebar.fragment";
 import type { FragmentOf } from "gql.tada";
 

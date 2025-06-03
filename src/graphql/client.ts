@@ -8,6 +8,6 @@ export const client = new GraphQLClient(import.meta.env.VITE_HYGRAPH_API_ENDPOIN
   },
 });
 
-export const graphql = initGraphQLTada<{ introspection: introspection; }>();
+export const graphql = initGraphQLTada<{ introspection: introspection }>();
 export type { FragmentOf, ResultOf, VariablesOf } from "gql.tada";
 export { readFragment } from "gql.tada";

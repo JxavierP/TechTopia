@@ -1,11 +1,10 @@
 import { readFragment, type FragmentOf } from "gql.tada";
 import formatter from "../../../utils/currency-formatter";
 import VariantSelector from "./VariantSelector";
-import { ModelSelectorFragment, ProductSidebarFragment, } from "./Sidebar.fragment";
+import ProductSidebarFragment, { ModelSelectorFragment } from "./Sidebar.fragment";
 
 interface ProductSidebarProps {
   product: FragmentOf<typeof ProductSidebarFragment>;
-  // loading: Boolean;
 }
 
 const ProductSidebar = (props: ProductSidebarProps) => {
