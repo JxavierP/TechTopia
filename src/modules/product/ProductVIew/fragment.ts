@@ -2,7 +2,7 @@ import { graphql } from "../../../graphql/client";
 import ImageViewerFragment from "../ProductCarousel/ImageViewer/fragment";
 import ProductSidebarFragment from "../ProductSidebar/Sidebar.fragment";
 
-export const ProductViewerFragment = graphql(
+const ProductViewerFragment = graphql(
   `
     fragment ProductViewerFragment on Variant {
       ...ImageViewerFragment
@@ -11,3 +11,5 @@ export const ProductViewerFragment = graphql(
   `,
   [ImageViewerFragment, ProductSidebarFragment],
 );
+
+export default ProductViewerFragment;
