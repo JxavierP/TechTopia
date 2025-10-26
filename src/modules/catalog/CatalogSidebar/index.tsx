@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 import type { ResultOf } from "gql.tada";
-import type { AllBrandsQuery } from "../../../graphql/queries";
+import type { AllBrandsQuery } from "../queries/fetchAllBrands";
 
 interface CatalogSidebarProps {
   data: ResultOf<typeof AllBrandsQuery>;

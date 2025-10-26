@@ -1,7 +1,7 @@
 import { For } from "solid-js";
-import ProductCardFragment from "../../product/ProductCard/fragment";
 import type { FragmentOf } from "gql.tada";
-import ProductCard from "../../product/ProductCard";
+import type { ProductCardFragment } from "../../product/fragments/ProductCard.fragment";
+import ProductCard from "../../product/components/ProductCard";
 
 const CatalogContent = (props: { products: FragmentOf<typeof ProductCardFragment>[] }) => {
   return (
@@ -48,7 +48,7 @@ const CatalogContent = (props: { products: FragmentOf<typeof ProductCardFragment
       </div>
       <main class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
         <For each={props.products} fallback={<div>Loading...</div>}>
-          {(product) => <ProductCard product={product!} />}
+          {(product) => <ProductCard data={product} />}
         </For>
       </main>
     </div>

@@ -1,14 +1,15 @@
-import { readFragment, type FragmentOf } from "gql.tada";
+import { readFragment, type FragmentOf } from "gql.tada"
+import ProductSidebarFragment from "../fragments/ProductSidebar.fragment"
+import { ModelSelectorFragment } from "../fragments/VariantSelector.fragment";
 import formatter from "../../../utils/currency-formatter";
 import VariantSelector from "./VariantSelector";
-import ProductSidebarFragment, { ModelSelectorFragment } from "./Sidebar.fragment";
 
 interface ProductSidebarProps {
-  product: FragmentOf<typeof ProductSidebarFragment>;
+  data: FragmentOf<typeof ProductSidebarFragment>;
 }
 
 const ProductSidebar = (props: ProductSidebarProps) => {
-  const product = readFragment(ProductSidebarFragment, props.product);
+  const product = readFragment(ProductSidebarFragment, props.data);
   const models = readFragment(ModelSelectorFragment, product.product?.variants);
   return (
     <div class="flex h-full w-1/3 flex-col pl-6">
@@ -42,9 +43,8 @@ const ProductSidebar = (props: ProductSidebarProps) => {
         </button>
       </div>
     </div>
-  );
-};
-
+  )
+}
 export default ProductSidebar;
 
 export function StarRating() {

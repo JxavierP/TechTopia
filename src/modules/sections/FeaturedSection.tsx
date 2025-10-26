@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/solid-query";
-import ProductCard from "../product/ProductCard";
+import ProductCard from "../product/components/ProductCard";
 import { createEffect, For, Show, Switch, Match } from "solid-js";
 import { client } from "../../graphql/client";
-import { AllSearchableProductsQuery } from "../../graphql/queries";
+import { AllSearchableProductsQuery } from "../../modules/product/queries/fetchAllSearchableProducts";
 
 interface FeaturedSectionProps {
   tag: string;
@@ -40,7 +40,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
       <Switch fallback={<div>Something went wrong.</div>}>
         <Match when={productQuery.isLoading}>
           <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto">
-            <For each={Array(4)}>{() => <ProductCard product={null} />}</For>
+            <For each={Array(4)}>{() => <ProductCard data={null} />}</For>
           </ul>
         </Match>
 
@@ -59,7 +59,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
               {" "}
               <For each={productQuery.data?.variants}>
                 {(product) => {
-                  return <ProductCard product={product} />;
+                  return <ProductCard data={product} />;
                 }}
               </For>
             </ul>

@@ -1,9 +1,9 @@
-import { Link } from "@tanstack/solid-router";
+import { readFragment, type FragmentOf } from "gql.tada";
+import { ColorSelectorFragment, ModelSelectorFragment } from "../fragments/VariantSelector.fragment";
+import { createEffect, createMemo, For, Show } from "solid-js";
 import { store as productStore, setStore as setProductStore } from "../Store";
 import { Route as ProductSlugRoute } from "../../../routes/product/$slug";
-import { createEffect, createMemo, For, Show } from "solid-js";
-import { ColorSelectorFragment, ModelSelectorFragment } from "./Sidebar.fragment";
-import { readFragment, type FragmentOf } from "gql.tada";
+import { Link } from "@tanstack/solid-router";
 
 const ColorSelector = (props: { colors: FragmentOf<typeof ColorSelectorFragment>[] }) => {
   const colors = createMemo(() => readFragment(ColorSelectorFragment, props.colors));
@@ -25,11 +25,10 @@ const ColorSelector = (props: { colors: FragmentOf<typeof ColorSelectorFragment>
                 }}
               >
                 <span
-                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${
-                    productStore.imageList.id === color.id
-                      ? "ring-green-600"
-                      : "ring-gray-400 hover:ring-green-600"
-                  }`}
+                  class={`flex h-12 w-12 flex-col items-center ring-2 ring-offset-2 ${productStore.imageList.id === color.id
+                    ? "ring-green-600"
+                    : "ring-gray-400 hover:ring-green-600"
+                    }`}
                 >
                   <img
                     alt={color.images[0].fileName}
@@ -49,13 +48,13 @@ const ColorSelector = (props: { colors: FragmentOf<typeof ColorSelectorFragment>
 const ModelSelector = (props: { models: FragmentOf<typeof ModelSelectorFragment>[] }) => {
   const routerSlug = ProductSlugRoute.useParams();
   const currentSlug = createMemo(() => routerSlug().slug);
-  const models = readFragment(ModelSelectorFragment, props.models);
+  const models = createMemo(() => readFragment(ModelSelectorFragment, props.models));
 
   return (
     <div class="flex flex-col space-y-1">
       <b>Models: </b>
       <ul class="flex flex-wrap space-x-3">
-        {models.map((model, index) => (
+        {models().map((model, index) => (
           <li tabIndex={index} title={`Click to select ${model.name}`}>
             <Link to="/product/$slug" preload="intent" params={{ slug: model.slug }}>
               <span
@@ -68,11 +67,10 @@ const ModelSelector = (props: { models: FragmentOf<typeof ModelSelectorFragment>
                     },
                   });
                 }}
-                class={`flex flex-col items-center px-2 ring-2 ring-offset-2 ${
-                  currentSlug() === model.slug
-                    ? "ring-green-600"
-                    : "ring-gray-400 hover:ring-green-600"
-                }`}
+                class={`flex flex-col items-center px-2 ring-2 ring-offset-2 ${currentSlug() === model.slug
+                  ? "ring-green-600"
+                  : "ring-gray-400 hover:ring-green-600"
+                  }`}
               >
                 {model.name}
               </span>
@@ -90,13 +88,17 @@ interface VariantSelectorProps {
 
 const VariantSelector = (props: VariantSelectorProps) => {
   const routerSlug = ProductSlugRoute.useParams();
-  const models = readFragment(ModelSelectorFragment, props.models);
+  const models = props.models;
   const selectedModel = createMemo(() => {
     const slug = routerSlug().slug;
-    return models.find((model) => model.slug === slug);
+    return models.find((data) => {
+      const model = readFragment(ModelSelectorFragment, data);
+      return model.slug === slug
+    });
   });
+
   createEffect(() => {
-    const model = selectedModel();
+    const model = readFragment(ModelSelectorFragment, selectedModel());
     if (model) {
       setProductStore({
         viewerImage: model.colors[0].images[0].url,
@@ -110,7 +112,10 @@ const VariantSelector = (props: VariantSelectorProps) => {
   return (
     <div class="mx-3 my-2 flex flex-col space-y-3">
       <ModelSelector models={props.models} />
-      <Show when={selectedModel()}>{(model) => <ColorSelector colors={model().colors} />}</Show>
+      <Show when={selectedModel()}>{(model) => {
+        const data = readFragment(ModelSelectorFragment, model())
+        return <ColorSelector colors={data.colors} />
+      }}</Show>
       {/* <SizeSelector /> */}
     </div>
   );

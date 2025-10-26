@@ -1,6 +1,6 @@
 import { graphql } from "../../../graphql/client";
 
-const ProductCardFragment = graphql(`
+export const ProductCardFragment = graphql(`
   fragment ProductCardFragment on Variant {
     id
     name
@@ -13,19 +13,14 @@ const ProductCardFragment = graphql(`
         name
       }
     }
-    colors {
+    colors(first: 1) {
       id
       name
       slug
-      images {
+      images(first: 1) {
         url
         fileName
       }
     }
-    sizes {
-      value
-    }
   }
 `);
-
-export default ProductCardFragment;

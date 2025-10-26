@@ -1,10 +1,9 @@
-import { Link } from "@tanstack/solid-router";
-import { store as productStore } from "../Store";
-import { store as cartStore } from "../../cart/CartStore";
 import { readFragment, type FragmentOf } from "gql.tada";
+import { store as productStore } from "../Store";
+import { ProductCardFragment } from "../fragments/ProductCard.fragment";
+import { Link } from "@tanstack/solid-router";
 import { PlusIcon } from "../../ui/Icons";
 import formatter from "../../../utils/currency-formatter";
-import ProductCardFragment from "./fragment";
 
 function handleProductClick(data: FragmentOf<typeof ProductCardFragment>) {
   const product = readFragment(ProductCardFragment, data);
@@ -13,9 +12,8 @@ function handleProductClick(data: FragmentOf<typeof ProductCardFragment>) {
   console.log("Product clicked:", product.name);
 }
 
-const ProductCard = (props: { product: FragmentOf<typeof ProductCardFragment> | null }) => {
-  const product = readFragment(ProductCardFragment, props.product);
-  console.log("Cart Store:", cartStore);
+const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | null }) => {
+  const product = readFragment(ProductCardFragment, props.data);
   if (!product) {
     return (
       <li
@@ -29,12 +27,12 @@ const ProductCard = (props: { product: FragmentOf<typeof ProductCardFragment> | 
           <div class="h-8 w-1/2 rounded bg-gray-200"></div>
         </div>
       </li>
-    );
-  }
+    )
+  };
 
   return (
     <li
-      on:click={() => handleProductClick(props.product!)}
+      on:click={() => handleProductClick(props.data!)}
       aria-label="ProductCard_container"
       class="group flex h-full w-full max-w-44 flex-shrink-0 cursor-pointer flex-col lg:max-w-3xs"
     >
@@ -45,22 +43,6 @@ const ProductCard = (props: { product: FragmentOf<typeof ProductCardFragment> | 
         >
           <button
             class="group/button absolute top-3 right-3 z-10 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-green-600 active:scale-105"
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              cartStore.addToCart({
-                id: product.id,
-                name: product.product!.name,
-                image: product.colors[0].images[0].url,
-                price: product.price,
-                quantity: 1,
-                selectedOptions: [
-                  { type: "Color", value: product.colors[0].name! },
-                  { type: "Model", value: product.name },
-                ],
-              });
-              console.log("Added to cart:", product.product!.name);
-            }}
           >
             <PlusIcon class="h-5 w-5 stroke-current text-gray-900 group-hover/button:text-white" />
           </button>
@@ -80,7 +62,7 @@ const ProductCard = (props: { product: FragmentOf<typeof ProductCardFragment> | 
         </div>
       </Link>
     </li>
-  );
+  )
 };
 
 export default ProductCard;

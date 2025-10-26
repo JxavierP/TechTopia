@@ -1,15 +1,15 @@
 import { queryOptions } from "@tanstack/solid-query";
 import { createFileRoute } from "@tanstack/solid-router";
 import { queryClient } from "../../main";
-import { client, readFragment, type FragmentOf } from "../../graphql/client";
-import ProductView from "../../modules/product/ProductVIew";
+import { client, readFragment } from "../../graphql/client";
 import { setStore as productStore } from "../../modules/product/Store";
-import { ProductBySlugQuery } from "../../graphql/queries";
-import ImageViewerFragment from "../../modules/product/ProductCarousel/ImageViewer/fragment";
-import ProductSidebarFragment, {
-  ColorSelectorFragment,
-} from "../../modules/product/ProductSidebar/Sidebar.fragment";
-import ProductViewerFragment from "../../modules/product/ProductVIew/fragment";
+import ProductPage from "../../modules/product/components/ProductPage";
+import { CarouselViewFragment } from "../../modules/product/fragments/ProductCarousel.fragment";
+import ProductPageFragment from "../../modules/product/fragments/ProductPage.fragment";
+import ProductSidebarFragment from "../../modules/product/fragments/ProductSidebar.fragment";
+import { ColorSelectorFragment } from "../../modules/product/fragments/VariantSelector.fragment";
+import ProductBySlugQuery from "../../modules/product/queries/fetchProductBySlug";
+import { maskFragments } from "gql.tada";
 
 const productQueryOptions = (slug: string) =>
   queryOptions({
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/product/$slug")({
 
 function RouteComponent() {
   const data = Route.useLoaderData();
-  const product = readFragment(ProductViewerFragment, data().variant);
-  const carouselData = readFragment(ImageViewerFragment, product!);
+  const product = readFragment(ProductPageFragment, data().variant);
+  const carouselData = readFragment(CarouselViewFragment, product!);
   const sidebarData = readFragment(ProductSidebarFragment, product!);
   const productColors = readFragment(ColorSelectorFragment, sidebarData.colors[0]);
   if (product) {
@@ -41,9 +41,9 @@ function RouteComponent() {
     });
   }
   return (
-    <ProductView
-      carouselProduct={carouselData as unknown as FragmentOf<typeof ImageViewerFragment>}
-      sidebarProduct={sidebarData as unknown as FragmentOf<typeof ProductSidebarFragment>}
+    <ProductPage
+      carouselProduct={maskFragments([CarouselViewFragment], carouselData)}
+      sidebarProduct={maskFragments([ProductSidebarFragment], sidebarData)}
     />
   );
 }

@@ -3,7 +3,8 @@ import { client } from "../graphql/client";
 import { queryOptions } from "@tanstack/solid-query";
 import { queryClient } from "../main";
 import { CatalogContent, CatalogSidebar } from "../modules/catalog";
-import { AllBrandsQuery, AllSearchableProductsQuery } from "../graphql/queries";
+import { AllSearchableProductsQuery } from "../modules/product/queries/fetchAllSearchableProducts";
+import { AllBrandsQuery } from "../modules/catalog/queries/fetchAllBrands";
 
 const searchableProductQueryOptions = () =>
   queryOptions({
