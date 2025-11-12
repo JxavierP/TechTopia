@@ -11,7 +11,7 @@ const CatalogSidebar = (props: CatalogSidebarProps) => {
   return (
     <div class="flex h-full w-60 shrink-0 flex-col space-y-3">
       <div class="flex flex-col space-y-2">
-        <span class="rounded-md bg-[#EDEDED] px-2 py-1 font-semibold text-green-500">
+        <span class="rounded-md bg-[#EDEDED] px-2 py-1 font-semibold text-green-800">
           Shop by Brands
         </span>
         <div class="flex flex-wrap gap-2">

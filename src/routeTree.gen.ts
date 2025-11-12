@@ -8,32 +8,76 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as CatalogRouteImport } from './routes/catalog'
-import { Route as CartRouteImport } from './routes/cart'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProductSlugRouteImport } from './routes/product/$slug'
+// Import Routes
 
-const CatalogRoute = CatalogRouteImport.update({
+import { Route as rootRoute } from './routes/__root'
+import { Route as CatalogImport } from './routes/catalog'
+import { Route as CartImport } from './routes/cart'
+import { Route as IndexImport } from './routes/index'
+import { Route as ProductSlugImport } from './routes/product/$slug'
+
+// Create/Update Routes
+
+const CatalogRoute = CatalogImport.update({
   id: '/catalog',
   path: '/catalog',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRoute,
 } as any)
-const CartRoute = CartRouteImport.update({
+
+const CartRoute = CartImport.update({
   id: '/cart',
   path: '/cart',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRoute,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+
+const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRoute,
 } as any)
-const ProductSlugRoute = ProductSlugRouteImport.update({
+
+const ProductSlugRoute = ProductSlugImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRoute,
 } as any)
+
+// Populate the FileRoutesByPath interface
+
+declare module '@tanstack/solid-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartImport
+      parentRoute: typeof rootRoute
+    }
+    '/catalog': {
+      id: '/catalog'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof CatalogImport
+      parentRoute: typeof rootRoute
+    }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugImport
+      parentRoute: typeof rootRoute
+    }
+  }
+}
+
+// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -41,19 +85,22 @@ export interface FileRoutesByFullPath {
   '/catalog': typeof CatalogRoute
   '/product/$slug': typeof ProductSlugRoute
 }
+
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
   '/product/$slug': typeof ProductSlugRoute
 }
+
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
+  __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
   '/product/$slug': typeof ProductSlugRoute
 }
+
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/cart' | '/catalog' | '/product/$slug'
@@ -62,44 +109,12 @@ export interface FileRouteTypes {
   id: '__root__' | '/' | '/cart' | '/catalog' | '/product/$slug'
   fileRoutesById: FileRoutesById
 }
+
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
   CatalogRoute: typeof CatalogRoute
   ProductSlugRoute: typeof ProductSlugRoute
-}
-
-declare module '@tanstack/solid-router' {
-  interface FileRoutesByPath {
-    '/catalog': {
-      id: '/catalog'
-      path: '/catalog'
-      fullPath: '/catalog'
-      preLoaderRoute: typeof CatalogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/product/$slug': {
-      id: '/product/$slug'
-      path: '/product/$slug'
-      fullPath: '/product/$slug'
-      preLoaderRoute: typeof ProductSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -108,6 +123,35 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogRoute: CatalogRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
-export const routeTree = rootRouteImport
+
+export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/cart",
+        "/catalog",
+        "/product/$slug"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/cart": {
+      "filePath": "cart.tsx"
+    },
+    "/catalog": {
+      "filePath": "catalog.tsx"
+    },
+    "/product/$slug": {
+      "filePath": "product/$slug.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

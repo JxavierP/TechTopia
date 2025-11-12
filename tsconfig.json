@@ -11,7 +11,8 @@
       {
         "name": "gql.tada/ts-plugin",
         "schema": "https://us-east-1.cdn.hygraph.com/content/cl6713mi9c4oe01t5fl2qfun4/master",
-        "tadaOutputLocation": "./src/graphql/graphql-env.d.ts"
+        "tadaOutputLocation": "./src/graphql/graphql-env.d.ts",
+        "shouldCheckForColocatedFragments": false
       }
     ],
     /* Bundler mode */
