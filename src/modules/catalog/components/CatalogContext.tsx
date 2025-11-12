@@ -46,7 +46,7 @@ const CatalogContent = (props: { products: FragmentOf<typeof ProductCardFragment
           <button class="ml-2">{/* <XIcon class="h-4 w-4" /> */}</button>
         </span>
       </div>
-      <main class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+      <main class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-5">
         <For each={props.products} fallback={<div>Loading...</div>}>
           {(product) => <ProductCard data={product} />}
         </For>

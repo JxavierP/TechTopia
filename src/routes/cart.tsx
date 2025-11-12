@@ -9,7 +9,7 @@ export const Route = createFileRoute("/cart")({
 function RouteComponent() {
   return (
     <main class="flex h-full w-screen flex-col overflow-x-hidden">
-      <section class="mt-4 flex h-full w-full px-4 md:px-8 lg:px-16">
+      <section class="mt-4 flex h-full w-full px-4 md:px-16 lg:px-32">
         <CartSummary />
         <Checkout />
       </section>
