@@ -33,6 +33,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
     });
   }
 
+
   return (
     <section class="flex w-full flex-col justify-start px-4 md:px-16 lg:px-32">
       <span class="my-3 font-lato font-semibold lg:text-2xl">Featured This Month</span>
@@ -58,9 +59,9 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
             <ul class="scrollbar-hide flex gap-x-8 overflow-x-auto">
               {" "}
               <For each={productQuery.data?.variants}>
-                {(product) => {
-                  return <ProductCard data={product} />;
-                }}
+                {product =>
+                  <ProductCard data={product} />
+                }
               </For>
             </ul>
           </Show>

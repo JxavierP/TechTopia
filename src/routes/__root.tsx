@@ -3,7 +3,6 @@ import Header from "../modules/ui/Header";
 import SubHeader from "../modules/ui/SubHeader";
 import { Route as ProductSlugRoute } from "./product/$slug";
 import { Route as CartRoute } from "./cart";
-// import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 // import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools'
 
 export const Route = createRootRouteWithContext()({

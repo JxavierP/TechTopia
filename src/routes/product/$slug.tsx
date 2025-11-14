@@ -2,7 +2,6 @@ import { queryOptions } from "@tanstack/solid-query";
 import { createFileRoute } from "@tanstack/solid-router";
 import { queryClient } from "../../main";
 import { client, readFragment } from "../../graphql/client";
-import { setStore as productStore } from "../../modules/product/Store";
 import ProductPage from "../../modules/product/components/ProductPage";
 import { CarouselViewFragment } from "../../modules/product/fragments/ProductCarousel.fragment";
 import ProductPageFragment from "../../modules/product/fragments/ProductPage.fragment";
@@ -10,6 +9,7 @@ import ProductSidebarFragment from "../../modules/product/fragments/ProductSideb
 import { ColorSelectorFragment } from "../../modules/product/fragments/VariantSelector.fragment";
 import ProductBySlugQuery from "../../modules/product/queries/fetchProductBySlug";
 import { maskFragments } from "gql.tada";
+import { useCarouselStore } from "../../modules/product/Store";
 
 const productQueryOptions = (slug: string) =>
   queryOptions({
@@ -35,7 +35,7 @@ function RouteComponent() {
   const sidebarData = readFragment(ProductSidebarFragment, product!);
   const productColors = readFragment(ColorSelectorFragment, sidebarData.colors[0]);
   if (product) {
-    productStore({
+    useCarouselStore().setCarouselStore({
       viewerImage: productColors.images[0].url,
       imageList: { id: productColors.id, list: productColors.images },
     });

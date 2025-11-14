@@ -1,5 +1,5 @@
-import type { FragmentOf } from "gql.tada"
-import type { CarouselViewFragment } from "../fragments/ProductCarousel.fragment"
+import type { FragmentOf } from "gql.tada";
+import type { CarouselViewFragment } from "../fragments/ProductCarousel.fragment";
 import type ProductSidebarFragment from "../fragments/ProductSidebar.fragment";
 import ProductCarousel from "./ProductCarousel";
 import ProductSidebar from "./ProductSidebar";
@@ -10,7 +10,7 @@ interface ProductPageProps {
 }
 const ProductPage = (props: ProductPageProps) => {
   return (
-    <div class="flex h-full w-screen px-4 md:px-8 lg:px-16">
+    <div class="flex h-full w-screen px-4 md:px-16 lg:px-32">
       <ProductCarousel data={props.carouselProduct} />
       <ProductSidebar data={props.sidebarProduct} />
     </div>

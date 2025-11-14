@@ -1,16 +1,9 @@
 import { readFragment, type FragmentOf } from "gql.tada";
-import { store as productStore } from "../Store";
 import { ProductCardFragment } from "../fragments/ProductCard.fragment";
 import { Link } from "@tanstack/solid-router";
 import { PlusIcon } from "../../ui/Icons";
 import formatter from "../../../utils/currency-formatter";
-
-function handleProductClick(data: FragmentOf<typeof ProductCardFragment>) {
-  const product = readFragment(ProductCardFragment, data);
-  productStore.viewerImage = product.colors[0].images[0].url;
-  productStore.imageList = { id: product.id, list: product.colors[0].images };
-  console.log("Product clicked:", product.name);
-}
+import { onCleanup } from "solid-js";
 
 const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | null }) => {
   const product = readFragment(ProductCardFragment, props.data);
@@ -32,7 +25,6 @@ const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | nul
 
   return (
     <li
-      on:click={() => handleProductClick(props.data!)}
       aria-label="ProductCard_container"
       class="group flex h-full w-full max-w-44 flex-shrink-0 cursor-pointer flex-col lg:max-w-3xs"
     >

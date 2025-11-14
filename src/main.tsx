@@ -4,6 +4,8 @@ import { render } from "solid-js/web";
 import { routeTree } from "./routeTree.gen";
 import "./styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
+import { CarouselProdivder } from "./modules/product/Store";
+import 'solid-devtools';
 
 export const queryClient = new QueryClient();
 
@@ -25,9 +27,11 @@ declare module "@tanstack/solid-router" {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <CarouselProdivder>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </CarouselProdivder>
   );
 }
 
