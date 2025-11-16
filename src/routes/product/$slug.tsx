@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/solid-query";
 import { createFileRoute } from "@tanstack/solid-router";
-import { queryClient } from "../../main";
+import { queryClient } from "../../utils/queryClient";
 import { client, readFragment } from "../../graphql/client";
 import ProductPage from "../../modules/product/components/ProductPage";
 import { CarouselViewFragment } from "../../modules/product/fragments/ProductCarousel.fragment";
@@ -22,6 +22,7 @@ const productQueryOptions = (slug: string) =>
   });
 
 export const Route = createFileRoute("/product/$slug")({
+  beforeLoad: () => ({ showSubHeader: false }),
   component: RouteComponent,
   loader: async ({ params: { slug } }) => {
     return queryClient.ensureQueryData(productQueryOptions(slug));

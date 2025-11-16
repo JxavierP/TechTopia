@@ -3,6 +3,7 @@ import CartSummary from "../modules/cart/CartView/CartSummery";
 import Checkout from "../modules/cart/CartView/Checkout";
 
 export const Route = createFileRoute("/cart")({
+  beforeLoad: () => ({ showSubHeader: false }),
   component: RouteComponent,
 });
 

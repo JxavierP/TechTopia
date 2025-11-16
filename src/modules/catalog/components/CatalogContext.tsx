@@ -5,7 +5,7 @@ import ProductCard from "../../product/components/ProductCard";
 
 const CatalogContent = (props: { products: FragmentOf<typeof ProductCardFragment>[] }) => {
   return (
-    <div class="flex h-full w-full flex-col p-2">
+    <div class="flex h-full w-full flex-col">
       <header class="flex items-center justify-between">
         <div class="flex flex-col">
           <span class="text-4xl font-semibold text-green-600 uppercase">Catalog</span>
@@ -46,7 +46,7 @@ const CatalogContent = (props: { products: FragmentOf<typeof ProductCardFragment
           <button class="ml-2">{/* <XIcon class="h-4 w-4" /> */}</button>
         </span>
       </div>
-      <main class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-5">
+      <main class="my-2 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
         <For each={props.products} fallback={<div>Loading...</div>}>
           {(product) => <ProductCard data={product} />}
         </For>

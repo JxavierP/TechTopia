@@ -6,13 +6,13 @@ import "./styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { CarouselProdivder } from "./modules/product/Store";
 import 'solid-devtools';
+import { queryClient } from "./utils/queryClient";
 
-export const queryClient = new QueryClient();
 
 const router = createRouter({
   routeTree,
   context: {
-    queryClient,
+    showSubHeader: true,
   },
   defaultPreload: "intent",
   scrollRestoration: true,
