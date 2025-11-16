@@ -10,7 +10,7 @@ const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | nul
     return (
       <li
         aria-label="ProductCard_container_loading"
-        class="flex w-3xs flex-shrink-0 animate-pulse flex-col"
+        class="flex w-3xs shrink-0 animate-pulse flex-col"
       >
         <div class="mb-1 h-80 rounded-xl bg-gray-200"></div>
         <div class="mt-2 flex flex-col space-y-2">
@@ -25,7 +25,7 @@ const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | nul
   return (
     <li
       aria-label="ProductCard_container"
-      class="group flex h-full w-full max-w-44 flex-shrink-0 cursor-pointer flex-col lg:max-w-3xs"
+      class="group flex h-full w-full max-w-44 shrink-0 cursor-pointer flex-col lg:max-w-3xs"
     >
       <Link to="/product/$slug" preload="intent" params={{ slug: product.slug }}>
         <div

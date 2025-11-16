@@ -3,7 +3,7 @@ import { render } from "solid-js/web";
 
 import { routeTree } from "./routeTree.gen";
 import "./styles.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
+import { QueryClientProvider } from "@tanstack/solid-query";
 import { CarouselProdivder } from "./modules/product/Store";
 import 'solid-devtools';
 import { queryClient } from "./utils/queryClient";
@@ -16,7 +16,7 @@ const router = createRouter({
   },
   defaultPreload: "intent",
   scrollRestoration: true,
-  defaultPreloadStaleTime: 0,
+  defaultPreloadStaleTime: 30,
 });
 
 declare module "@tanstack/solid-router" {

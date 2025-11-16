@@ -16,7 +16,7 @@ const FeaturedSection = (props: FeaturedSectionProps) => {
         tag: props.tag,
       });
     },
-    // staleTime: 5 * 60 * 1000,
+    // staletime: 5 * 60 * 1000,
   }));
 
   if (import.meta.env.DEV) {
