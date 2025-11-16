@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/solid-router";
 import { client } from "../graphql/client";
 import { queryOptions } from "@tanstack/solid-query";
-import { queryClient } from "../main";
+import { queryClient } from "../utils/queryClient";
 import { AllSearchableProductsQuery } from "../modules/product/queries/fetchAllSearchableProducts";
 import { AllBrandsQuery } from "../modules/catalog/queries/fetchAllBrands";
 import CatalogSidebar from "../modules/catalog/components/CatalogSidebar";

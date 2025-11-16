@@ -3,7 +3,6 @@ import { ProductCardFragment } from "../fragments/ProductCard.fragment";
 import { Link } from "@tanstack/solid-router";
 import { PlusIcon } from "../../ui/Icons";
 import formatter from "../../../utils/currency-formatter";
-import { onCleanup } from "solid-js";
 
 const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | null }) => {
   const product = readFragment(ProductCardFragment, props.data);
