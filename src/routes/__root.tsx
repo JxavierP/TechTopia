@@ -1,6 +1,7 @@
 import { Outlet, createRootRouteWithContext, useRouterState } from "@tanstack/solid-router";
 import Header from "../modules/ui/Header";
 import SubHeader from "../modules/ui/SubHeader";
+// import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 
 export interface RootRouterContext {
   showSubHeader: boolean;
@@ -20,7 +21,7 @@ function RootComponent() {
         {showSubHeader() && <SubHeader />}
         <Outlet />
       </div>
-      {/* <TanStackRouterDevtools /> */}
+      {/*<TanStackRouterDevtools />*/}
     </div>
   );
 }
