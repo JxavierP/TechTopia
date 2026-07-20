@@ -13,14 +13,12 @@ function Header() {
           <span class="text-green-600">TOPIA</span>.
         </Link>
       </div>
-      <div class="flex w-1/3 justify-center">
-        <button class="group flex items-center justify-center rounded-md bg-white p-2 hover:bg-green-600 hover:text-white">
-          <SearchIcon class="group-active:text-white" />
-        </button>
+      <div class="my-8 flex w-1/3 justify-start rounded-md bg-white p-2 shadow-sm">
+        <SearchIcon class="text-gray-500" />
         <input
           type="search"
-          class="bg-white px-2 text-black outline-none"
-          placeholder="Search for anything."
+          class="w-full bg-white px-2 text-gray-600 outline-none"
+          placeholder="Search for anything...."
         />
       </div>
       <div class="flex w-1/3 justify-end">

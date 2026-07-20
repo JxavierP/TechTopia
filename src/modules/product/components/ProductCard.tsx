@@ -19,8 +19,8 @@ const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | nul
           <div class="h-8 w-1/2 rounded bg-gray-200"></div>
         </div>
       </li>
-    )
-  };
+    );
+  }
 
   return (
     <li
@@ -32,9 +32,7 @@ const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | nul
           aria-label="ProductCard_image_container"
           class="relative mb-1 flex h-54 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-transparent bg-white shadow-xl transition-transform duration-200 ease-linear group-hover:border-green-600 active:scale-95 lg:h-80"
         >
-          <button
-            class="group/button absolute top-3 right-3 z-10 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-green-600 active:scale-105"
-          >
+          <button class="group/button absolute top-3 right-3 z-10 rounded-md border-2 border-gray-300 p-0.5 transition-transform duration-100 ease-in hover:border-transparent hover:bg-green-600 active:scale-105">
             <PlusIcon class="h-5 w-5 stroke-current text-gray-900 group-hover/button:text-white" />
           </button>
           <img
@@ -48,12 +46,12 @@ const ProductCard = (props: { data: FragmentOf<typeof ProductCardFragment> | nul
           <span class="font-sans text-sm font-semibold text-green-600">
             {product.product?.brand?.name}
           </span>
-          <p class="truncate font-sans text-base font-semibold text-[#131416]">{product.name}</p>
+          <p class="truncate font-pt text-[#131416]">{product.name}</p>
           <p class="font-bebas text-3xl text-[#131416]">{formatter.format(product.price)}</p>
         </div>
       </Link>
     </li>
-  )
+  );
 };
 
 export default ProductCard;
