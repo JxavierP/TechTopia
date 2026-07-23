@@ -23,7 +23,7 @@ const brandsQueryOptions = () =>
     },
   });
 
-export const Route = createFileRoute("/catalog")({
+export const Route = createFileRoute("/catalog/")({
   component: RouteComponent,
   loader: async () => {
     const [productsData, brandsData] = await Promise.all([
