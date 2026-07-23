@@ -2,6 +2,7 @@
 import type { ResultOf } from "gql.tada";
 import type { AllCategoriesQuery } from "./queries/fetchAllCategories";
 import { For } from "solid-js";
+import { Link } from "@tanstack/solid-router";
 
 interface SubHeaderProps {
   categories: ResultOf<typeof AllCategoriesQuery>;
@@ -15,7 +16,11 @@ const SubHeader = (props: SubHeaderProps) => {
         Browse
       </Link>*/}
       <For each={categories} fallback={<div>Loading...</div>}>
-        {(category) => <p class="link-underline cursor-pointer">{category.name}</p>}
+        {(category) => (
+          <Link to="/shop/category/$slug" preload="intent" params={{ slug: category.slug! }}>
+            <p class="link-underline cursor-pointer">{category.name}</p>
+          </Link>
+        )}
       </For>
       {/*<p class="link-underline cursor-pointer">New</p>
       <p class="link-underline cursor-pointer">Sales</p>
