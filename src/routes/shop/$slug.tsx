@@ -1,8 +1,8 @@
 import { queryOptions } from "@tanstack/solid-query";
 import { createFileRoute } from "@tanstack/solid-router";
-import { CategoryBySlugQuery } from "../../../modules/catalog/queries/fetchCategoryBySlug";
-import { client } from "../../../graphql/client";
-import { queryClient } from "../../../utils/queryClient";
+import { CategoryBySlugQuery } from "../../modules/catalog/queries/fetchCategoryBySlug";
+import { client } from "../../graphql/client";
+import { queryClient } from "../../utils/queryClient";
 
 const categoryQueryOptions = (slug: string) =>
   queryOptions({
@@ -12,7 +12,7 @@ const categoryQueryOptions = (slug: string) =>
     },
   });
 
-export const Route = createFileRoute("/shop/category/$slug")({
+export const Route = createFileRoute("/shop/$slug")({
   component: RouteComponent,
   loader: async ({ params: { slug } }) => {
     return queryClient.ensureQueryData(categoryQueryOptions(slug));
@@ -22,6 +22,6 @@ export const Route = createFileRoute("/shop/category/$slug")({
 function RouteComponent() {
   const data = Route.useLoaderData();
   const category = data().category!.name;
-  console.log();
+  console.log(category);
   return <div>Hello {category}</div>;
 }

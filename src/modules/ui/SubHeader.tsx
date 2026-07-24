@@ -17,7 +17,7 @@ const SubHeader = (props: SubHeaderProps) => {
       </Link>*/}
       <For each={categories} fallback={<div>Loading...</div>}>
         {(category) => (
-          <Link to="/shop/category/$slug" preload="intent" params={{ slug: category.slug! }}>
+          <Link to="/shop/$slug" preload="intent" params={{ slug: category.slug! }}>
             <p class="link-underline cursor-pointer">{category.name}</p>
           </Link>
         )}
